@@ -44,11 +44,11 @@ const displayDetails=(categories)=>{
     console.log(items)
 
    const buttonContainer = document.createElement('div')
-     buttonContainer.classList.add('flex', 'items-center','gap-2','font-bold','border-teal-200','border','px-11','py-3','rounded-full'
-        ,'text-gray-700','hover:bg-teal-100','transition'
+     buttonContainer.classList.add('flex', 'items-center','gap-2','font-bold','border-teal-600','border','px-11','py-3','rounded-xl'
+        ,'text-gray-700','hover:bg-teal-100','transition',
      );
      buttonContainer.innerHTML = `<img src = ${items.category_icon} class="w-8 h-8" />
-    <span>${items.category}</span>
+    <button onclick="loadPets('${items.category}')">${items.category}</button>
 
      `
      ;
@@ -58,6 +58,19 @@ const displayDetails=(categories)=>{
  });
      
 }
+
+const loadPets = (id) => {
+    // alert(id)
+
+    fetch (`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    .then(res=>res.json())
+    .then(data=>detailsVideo(data.data))
+    .catch(error=> console.log(error))
+
+}
+
+
+
 
  //  {
 //   "status": true,
@@ -89,15 +102,37 @@ const loadVideos = ()=>{
 
 const detailsVideo=(pets)=>{
     const videoContainer = document.getElementById('videos')
+    videoContainer.innerHTML="";
+
+    if(pets.length==0){
+    videoContainer.classList.remove('grid');
+    videoContainer.innerHTML=
+   
+    
+    `
+    <div class="bg-gray-300 border rounded-2xl">
+    <div class="w-30px flex justify-center pt-20">
+    <img class=w-200"" src="assets/error.webp">
+   </div>  
+     <h1 class="font-bold flex justify-center text-2xl py-4">No Information Available</h1>  
+     <p class="text-gray-700 flex justify-center pb-20">It is a long established fact that a reader will be distracted by the readable content of a <br> page when looking at 
+its layout.The point of using Lorem Ipsum is that it has a.</p>
+     <div/>
+   `
+
+    }
+    else{
+            videoContainer.classList.add('grid');
+    }
     // console.log(pets)
     pets.forEach(pets=>{
         // console.log(pets)
 
          const card = document.createElement('div')
-         card.classList = 'card bg-base-100 w-96 shadow-sm'
+         card.classList = 'card bg-base-100 w-75 shadow-sm'
          card.innerHTML =`
-          <figure class="px-3 pt-10 w-full h-48 object-cover rounded-xl">
-    <img class=""
+          <figure class="px-3 pt-3  overflow-hidden">
+    <img class="rounded-xl  w-80 h-48   object-cover"
       src=${pets.image}
       alt=""
       class="" />
@@ -106,7 +141,7 @@ const detailsVideo=(pets)=>{
     <h2 class="font-bold text-xl">${pets.pet_name}</h2>
    <div>
    <div class="flex items-center gap-2">
-   <img class="w-5 text-gray-500 " src ="https://img.icons8.com/?size=100&id=ETI89AT9Xeqo&format=png&color=000000"/>
+   <img class="w-5 text-gray-500 rounded-full  " src ="https://img.icons8.com/?size=100&id=ETI89AT9Xeqo&format=png&color=000000"/>
    <p class="text-gray-500">Breed: ${pets.breed}</p>
    </div>
    <div class="flex items-center gap-2">
@@ -117,10 +152,18 @@ const detailsVideo=(pets)=>{
    <img class="w-5 text-gray-500 py-1"  src="https://img.icons8.com/?size=100&id=QUuwkaxmcF9h&format=png&color=000000"/>
    <p class="text-gray-500">Gender: ${pets.gender}</p>
    </div>
-   <div class="flex gap-2">
+   <div class="flex gap-2 pb-5 border-b border-gray-300">
    <img class="w-5 text-gray-500" src="https://img.icons8.com/?size=100&id=85801&format=png&color=000000"/>
-   <p class="text-gray-500">Price:199$</p>
+   <p class="text-gray-500  border-blue-700">Price:199$</p>
+  
+   
    </div>
+   <div class="flex gap-7 mt-5">
+   <button onclick="loadBtn('${pets.petId}')" class="btn w-15 rounded-xl hover::  "><img class="w-5" src="https://img.icons8.com/?size=100&id=u8MTpAq972MG&format=png&color=000000"/></button>
+    <button class="btn w-18 rounded-xl text-cyan-500 font-bold">Adopt</button>
+     <button class="btn w-18 rounded-xl text-cyan-500 font-bold">Details</button>
+     </div>
+
    </div>
   </div> `
 
@@ -129,11 +172,34 @@ const detailsVideo=(pets)=>{
     });
 }
 
+loadBtn=(id)=>{
+//    alert(id)
 
+   fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
+   .then(res=>res.json())
+   .then(data=>loadPicture(data.petData))
+   .catch(error=>console.log(error))
+}
 
+loadPicture=(petData)=>{
+    //    console.log(petData)
 
+     const imageContainer = document.getElementById('images')
+     const petArray = [petData]
 
+     petArray.forEach(pet => {
+        const card = document.createElement('div')
+        card.innerHTML=`
+        <img class="rounded-lg  p-1 mt-4 border-2 border-gray-300" src="${pet.image}"/>
 
+      
+        
+        `
+          imageContainer.append(card)
+     });
+    
+
+}
 
 
 

@@ -35,7 +35,7 @@
             <p class="text-gray-500 p-6">It is a long established fact that a reader will be distracted by the readable
                 content of a page when
                 looking <br> at its layout. The point of using Lorem Ipsum is that it has a.</p>
-            <button class="btn btn-sm bg-sky-900 text-white px-5 rounded">View More</button>
+            <button class="btn btn-sm bg-sky-900 text-white  px-7 py-5 rounded-2xl ">View More</button>
             <div class=" flex justify-center">
                 <img src="assets/pet.webp" alt="">
             </div>
@@ -56,17 +56,91 @@
      
           
         </section>
-        <section class="w-11/12 mx-auto py-3 flex" >
-                   <h3 class="ps-22 font-bold text-xl">Best Deal For You</h3>
+        <section class="w-10/12 mx-auto py-5 flex items-center justify-between" >
+                   <h3 class=" font-bold text-xl">Best Deal For You</h3>
+                   <button class="btn  p-6  rounded-xl text-white bg-cyan-700">Sort by price</button>
                    <!-- for card  -->
+                    
         </section>
-        <section class="w-11/12 mx-auto   grid grid:cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10 border-spacing-3 rounded" id="videos">
-       
+        <section class="w-11/12 mx-auto flex py-10">
+        <div class="w-[75%] mx-auto gap-10 grid grid:cols-1 md:grid-cols-2 lg:grid-cols-3  border-spacing-3 rounded" id="videos">
+
+        </div>
+        <div class=" w-[18%] h-20 rounded-lg border-gray-700 shadow-xl grid md:grid-cols-1 lg:grid-cols-2 gap-2  border-spacing-3" id="images">
+
+        </div>
         </section>
     </main>
-    <footer>
+   <footer class="w-full bg-black px-6 py-10 md:px-12 md:py-14">
+  
+  <div class="max-w-6xl mx-auto grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
 
-    </footer>
+    <!-- Column 1: Brand Info -->
+    <div>
+      <div class="flex items-center gap-3 mb-5">
+        <img class="w-10 h-10 object-contain" src="assets/logo.webp" alt="Peddy logo">
+        <h1 class="text-white text-2xl font-bold">Peddy</h1>
+      </div>
+
+      <div class="space-y-2 text-sm text-gray-400">
+        <p>📍 av. Washington 165, NY CA 54003</p>
+        <p>📞 01789 267 849</p>
+        <p>✉️ abamin3091@gmail.com</p>
+        <p>🕐 Mon–Fri, 9:00 AM – 5:00 PM</p>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="flex gap-3 mt-6">
+        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-sky-600 rounded-lg flex items-center justify-center transition-colors duration-200">
+          <img class="w-4 h-4 invert" src="https://img.icons8.com/?size=100&id=118497&format=png&color=000000" alt="Facebook">
+        </a>
+        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-sky-600 rounded-lg flex items-center justify-center transition-colors duration-200">
+          <img class="w-4 h-4 invert" src="https://img.icons8.com/?size=100&id=9a46bTk3awwI&format=png&color=000000" alt="Instagram">
+        </a>
+        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-sky-600 rounded-lg flex items-center justify-center transition-colors duration-200">
+          <img class="w-4 h-4 invert" src="https://img.icons8.com/?size=100&id=cMRBi0rI3iwb&format=png&color=000000" alt="Twitter">
+        </a>
+        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-sky-600 rounded-lg flex items-center justify-center transition-colors duration-200">
+          <img class="w-4 h-4 invert" src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=000000" alt="YouTube">
+        </a>
+      </div>
+    </div>
+
+    <!-- Column 2: Useful Links -->
+    <div>
+      <h3 class="text-white text-lg font-semibold mb-5">Useful Links</h3>
+      <ul class="space-y-3 text-sm text-gray-400">
+        <li><a href="#" class="hover:text-white transition-colors duration-150">Home</a></li>
+        <li><a href="#" class="hover:text-white transition-colors duration-150">About Us</a></li>
+        <li><a href="#" class="hover:text-white transition-colors duration-150">Animals</a></li>
+        <li><a href="#" class="hover:text-white transition-colors duration-150">Foundation</a></li>
+        <li><a href="#" class="hover:text-white transition-colors duration-150">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Newsletter -->
+    <div>
+      <h4 class="text-white text-lg font-semibold mb-5">Drop a Message</h4>
+      <p class="text-gray-400 text-sm mb-4">Subscribe to get updates on pet adoptions and care tips.</p>
+
+      <input
+        type="email"
+        placeholder="Enter your email"
+        class="w-full bg-gray-800 text-gray-300 placeholder-gray-500 text-sm rounded-lg px-4 py-2.5 border border-gray-700 focus:outline-none focus:border-sky-500 transition-colors duration-150 mb-3"
+      >
+      <button class="w-full bg-sky-600 hover:bg-sky-500 text-white text-sm font-medium py-2.5 rounded-lg transition-colors duration-150">
+        Subscribe
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="max-w-6xl mx-auto mt-10 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
+    © 2025 Peddy. All rights reserved.
+  </div>
+
+</footer>
     <script src="script/peddy.js"></script>
 </body>
 
