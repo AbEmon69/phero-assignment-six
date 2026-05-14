@@ -28,7 +28,7 @@
 // }
 
 
-
+// Category Button
 
 const loadCategories=()=>{
     fetch `https://openapi.programming-hero.com/api/peddy/categories`
@@ -41,14 +41,17 @@ const displayDetails=(categories)=>{
     // console.log(categories);
     const categoryContainer = document.getElementById('animals')
  categories.forEach(items => {
-    console.log(items)
+    // console.log(items)
+
+//('flex','gap-4','font-bold','border-teal-600','border','px-11','py-3','rounded-xl'
+        // ,'text-gray-700','hover:bg-teal-100','transition',
 
    const buttonContainer = document.createElement('div')
-     buttonContainer.classList.add('flex', 'items-center','gap-2','font-bold','border-teal-600','border','px-11','py-3','rounded-xl'
-        ,'text-gray-700','hover:bg-teal-100','transition',
+     buttonContainer.classList.add('flex','items-center','text-center','justify-center','border','w-[110px]','border-gray-400','gap-2',
+        'rounded-xl','hover:bg-teal-100','shadow','w-[160px]','p-4'
      );
-     buttonContainer.innerHTML = `<img src = ${items.category_icon} class="w-8 h-8" />
-    <button onclick="loadPets('${items.category}')">${items.category}</button>
+     buttonContainer.innerHTML = `<img src = ${items.category_icon} class="w-7 h-7" />
+    <button class ="font-bold" onclick="loadPets('${items.category}')">${items.category}</button>
 
      `
      ;
@@ -56,38 +59,37 @@ const displayDetails=(categories)=>{
      categoryContainer.append(buttonContainer)
 
  });
+ 
+
      
 }
 
 const loadPets = (id) => {
+
+   // for spinner show
+      document.getElementById('spinner').classList.remove('hidden')
     // alert(id)
 
-    fetch (`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-    .then(res=>res.json())
-    .then(data=>detailsVideo(data.data))
-    .catch(error=> console.log(error))
 
+    // for 2 second time 
+    setTimeout(()=>{
+
+
+      //for hidden spinner
+      document.getElementById('spinner').classList.add('hidden')
+      
+      fetch (`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+      .then(res=>res.json())
+      .then(data=>detailsVideo(data.data))
+      .catch(error=> console.log(error))
+      
+
+
+    },2000)
+    
 }
 
 
-
-
- //  {
-//   "status": true,
-//   "message": "successfully fetched all the pets data",
-//   "pets": [
-//     {
-//       "petId": 1,
-//       "breed": "Golden Retriever",
-//       "category": "Dog",
-//       "date_of_birth": "2023-01-15",
-//       "price": 1200,
-//       "image": "https://i.ibb.co.com/p0w744T/pet-1.jpg",
-//       "gender": "Male",
-//       "pet_details": "This friendly male Golden Retriever is energetic and loyal, making him a perfect companion for families. Born on January 15, 2023, he enjoys playing outdoors and is especially great with children. Fully vaccinated, he's ready to join your family and bring endless joy. Priced at $1200, he offers love, loyalty, and a lively spirit for those seeking a playful yet gentle dog.",
-//       "vaccinated_status": "Fully",
-//       "pet_name": "Sunny"
-//     },
 
 
 
@@ -128,6 +130,10 @@ its layout.The point of using Lorem Ipsum is that it has a.</p>
     pets.forEach(pets=>{
         // console.log(pets)
 
+
+
+        // create a card 
+
          const card = document.createElement('div')
          card.classList = 'card bg-base-100 w-75 shadow-sm'
          card.innerHTML =`
@@ -159,18 +165,105 @@ its layout.The point of using Lorem Ipsum is that it has a.</p>
    
    </div>
    <div class="flex gap-7 mt-5">
-   <button onclick="loadBtn('${pets.petId}')" class="btn w-15 rounded-xl hover::  "><img class="w-5" src="https://img.icons8.com/?size=100&id=u8MTpAq972MG&format=png&color=000000"/></button>
+   <button onclick="loadBtn('${pets.petId}')" class="btn w-15 rounded-xl  "><img class="w-5" src="https://img.icons8.com/?size=100&id=u8MTpAq972MG&format=png&color=000000"/></button>
     <button class="btn w-18 rounded-xl text-cyan-500 font-bold">Adopt</button>
-     <button class="btn w-18 rounded-xl text-cyan-500 font-bold">Details</button>
+     <button class="btn w-18 rounded-xl hover:bg-cyan-700 hover:text-white text-cyan-500 font-bold" onclick="loadDetails(${pets.petId})" >Details</button>
      </div>
-
+     
    </div>
   </div> `
 
 
     videoContainer.append(card)
     });
+
+  
+
 }
+
+
+
+
+
+
+
+
+// this function is for details button showing modal pop pop
+
+const loadDetails=(petId)=>{
+//    console.log(petId)
+
+   fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+   .then(res=>res.json())
+   .then(data=>loadBtnDetails(data.petData))
+   .catch(error=>console.log(error))
+}
+   const loadBtnDetails=(petData)=>{
+    console.log(petData)
+
+      const modalContainer = document.getElementById("modal-content")
+      modalContainer.innerHTML=`
+       <img class="w-full rounded-lg" src=${petData.image}/>
+       <h1 class="font-bold py-2 text-lg">${petData.category}</h1>
+       <div class="flex gap-4">
+       <div class="flex gap-1">
+       <img class="w-5 h-5" src ="https://img.icons8.com/?size=100&id=ETI89AT9Xeqo&format=png&color=000000"/>
+       <p class="text-gray-500">Breed: ${petData.breed}</p>
+       </div>
+       <div class="flex gap-1">
+        <img class="w-6 text-gray-500" src="https://img.icons8.com/?size=100&id=wSNPBOvl6qCE&format=png&color=000000" />
+         <p class="text-gray-500">Birth: ${petData.date_of_birth}</p>
+       </div>
+       
+       </div>
+       <div class="flex gap-4 items-center">
+       <div class="py-2 flex gap-1">
+           <img class="w-5 text-gray-400" src="https://img.icons8.com/?size=100&id=109041&format=png&color=000000"/>
+            <p class="text-gray-500">Gender: ${petData.gender}</p>
+       </div>
+       <div class="flex gap-1">
+
+        <img class="w-4 h-4 text-gray-500" src="https://img.icons8.com/?size=100&id=85801&format=png&color=000000"/>
+        <p class="text-gray-500  border-blue-700">Price:199$</p>
+       </div>
+       </div>
+       <div class="flex gap-1">
+       <img class="w-5 h-5 text-gray-400" src="https://img.icons8.com/?size=100&id=109041&format=png&color=000000"/>
+       <p class="text-gray-500">  Vaccinated status: ${petData.vaccinated_status}</P>
+       </div>
+       <hr class="border-t border-gray-300 my-5">
+       <h1 class="font-bold text-lg py-2">Details Information</h1>
+       <p class="text-gray-500">${petData.pet_details}</p>
+    
+      
+      
+      
+      `
+
+
+
+    // way-1
+    //  document.getElementById("modalData").click()
+     // way-2
+       document.getElementById("customModal").showModal()
+     
+
+   }
+ 
+
+// {
+//     "petId": 1,
+//     "breed": "Golden Retriever",
+//     "category": "Dog",
+//     "date_of_birth": "2023-01-15",
+//     "price": 1200,
+//     "image": "https://i.ibb.co.com/p0w744T/pet-1.jpg",
+//     "gender": "Male",
+//     "pet_details": "This friendly male Golden Retriever is energetic and loyal, making him a perfect companion for families. Born on January 15, 2023, he enjoys playing outdoors and is especially great with children. Fully vaccinated, he's ready to join your family and bring endless joy. Priced at $1200, he offers love, loyalty, and a lively spirit for those seeking a playful yet gentle dog.",
+//     "vaccinated_status": "Fully",
+//     "pet_name": "Sunny"
+// }
+
 
 loadBtn=(id)=>{
 //    alert(id)
